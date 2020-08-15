@@ -1,37 +1,30 @@
-import React from 'react'
-import Header from '../components/Header/Header'
-import ContactPanel from '../components/ContactPanel/ContactPanel'
-import InputMessage from '../components/InputMessage/InputMessage'
-import Main from './Main/Main'
-import styled from 'styled-components'
+import React, {useEffect} from 'react'
 import Login from "./Login/Login";
-import {signOut} from "../store/auth/actions";
+import Messenger from "./Messanger/Messanger";
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
 import {connect} from "react-redux";
+import {loadUserData} from "../store/auth/actions";
 
-const Wrapper = styled.div`
-	margin: 0 auto;
-	max-width: 720px;
-`
 
 const App = (props) => {
-    const {signOut} = props;
+	const {authStore: {name}} = props;
+	useEffect(() => {
+			if(name) props.loadUserData(name)
+	}, []);
 	return (
 		<>
-			<Wrapper>
-				<Header onSignOut={signOut}/>
-				<ContactPanel />
-				<Main/>
-				<InputMessage />
-			</Wrapper>
-			<Login/>
+			<Router>
+				<Route exact path='/' render={(props) =>  !name ? <Login {...props} /> : <Redirect to='/messenger'/> }/>
+				<Route path='/messenger' component={Messenger}/>
+			</Router>
 		</>
 	)
-}
-
+};
 
 const mapStateFromProps = ({authStore}) => ({authStore});
 
 const mapDispatchToProps = {
-    signOut
+	loadUserData
 };
-export default connect(mapStateFromProps,mapDispatchToProps)(App)
+
+export default connect(mapStateFromProps, mapDispatchToProps)(App)

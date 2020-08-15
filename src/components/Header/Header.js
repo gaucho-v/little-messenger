@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Button} from "react-bootstrap";
 
 const Wrapper = styled.header`
     display: flex;
@@ -30,12 +31,12 @@ const Header = ({onSignOut, currentUser}) => {
 	return (
 		<Wrapper>
 			<CurrentUser>
-				{currentUser ? currentUser : 'Не установлен'}
+				{currentUser ? `Пользователь: ${currentUser}` : 'Пользователь: не установлен'}
 			</CurrentUser>
 			<SignOut>
-				<button onClick={() => onSignOut()}>
+				<Button style={{backgroundColor: '#2b5279'}} variant="secondary" size='sm' onClick={onSignOut}>
 					Выход
-				</button>
+				</Button>
 			</SignOut>
 		</Wrapper>
 	)

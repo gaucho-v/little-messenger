@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import styled from 'styled-components'
 import Message from "../Message/Message";
 
@@ -8,20 +8,30 @@ const Wrapper = styled.section`
 	background-color: #142233;
 	width: 100%;
 	align-items: flex-end;
-
 	border: 1px solid black;
+	overflow-y: auto;
+    height: 364px;
 `
 
 const Text = styled.p`
-	color: white;
-	margin: 4px;
+	color: red;
+	position: relative;
+    left: -40%;
+    top: 40%;
 `
 
-const WindowChat = ({ messages }) => {
+
+const WindowChat = ({ messages,userName,recipient }) => {
+	const wrapperRef = useRef(null);
+	useEffect(() => {
+		wrapperRef.current.scrollTop = wrapperRef.current['scrollHeight'];
+	});
 	return (
-		<Wrapper>
-			{!messages ? <Message text='Привет, как дела?'/> : <Text>Сообщений нет</Text>}
-			<Message text='Здравствуй! Отлично!'/>
+		<Wrapper ref={wrapperRef}>
+			{userName ? messages ? messages.map((el,id) =>
+					<Message text={el.text} author={el.author} key={el.text + id} recipient={recipient}/>) :
+					<Message text='Сообщений нет' recipient={recipient}/> :
+					<Text>Пропущена стадия логина</Text> }
 		</Wrapper>
 	)
 }

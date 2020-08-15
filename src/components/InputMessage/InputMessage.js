@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import styled from 'styled-components'
 
 
@@ -15,10 +15,23 @@ const Input = styled.input`
 	box-sizing: border-box;
 `
 
-const InputMessage = ({onChange}) => {
+const InputMessage = ({onSendMessage, currentUser, recipient}) => {
+	const [value, setValue] = useState('');
+	const change = (e) => setValue(e.target.value);
+	const sub = (e) => {
+		e.preventDefault();
+		onSendMessage(value)
+		setValue('')
+	};
+	const inputRef = useRef(null)
+	useEffect(() => {
+		inputRef.current.focus()
+	})
 	return (
 		<Wrapper>
-			<Input placeholder='введите сообщение' />
+			<form onSubmit={(e) => sub(e)}>
+				<Input ref={inputRef} placeholder='введите сообщение' disabled={!currentUser || !recipient} value={value} onChange={(e) => change(e)}/>
+			</form>
 		</Wrapper>
 	)
 }
