@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "54709fbb123a122db89ebca4632cd934",
+    "revision": "748844fa840060d6f825ccb769957c66",
     "url": "/little-messenger/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/little-messenger/static/js/2.082988d9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c63c34f3dcc8af8c4f93",
-    "url": "/little-messenger/static/js/main.40861aa0.chunk.js"
+    "revision": "a7d83a566d3b17d034c6",
+    "url": "/little-messenger/static/js/main.355e606d.chunk.js"
   },
   {
     "revision": "c9b93728caf58610352c",
