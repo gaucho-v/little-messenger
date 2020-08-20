@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 import styled from 'styled-components'
-import Message from "../Message/Message";
+import Message from "./Message";
 
 const Wrapper = styled.section`
 	display: flex;
@@ -29,7 +29,7 @@ const WindowChat = ({ messages,userName,recipient }) => {
 	return (
 		<Wrapper ref={wrapperRef}>
 			{userName ? messages ? messages.map((el,id) =>
-					<Message text={el.text} author={el.author} key={el.text + id} recipient={recipient}/>) :
+					<Message text={el.text} author={el.author} key={el.text + id} recipient={recipient} date={el.date}/>) :
 					<Message text='Сообщений нет' recipient={recipient}/> :
 					<Text>Пропущена стадия логина</Text> }
 		</Wrapper>

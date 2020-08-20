@@ -24,6 +24,7 @@ const CurrentUser = styled.div`
 	justify-content: center;
 	margin-left: 16px;
 	color: white;
+	font-size: larger;
 `
 
 const Header = ({onSignOut, currentUser}) => {

@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import styled from 'styled-components'
 import Contact from "./Contact";
 import {selectRecipient,} from "../../store/app/actions";
+import SearchContact from "./SearchContact";
 
 const Wrapper = styled.aside`
 	background-color: #233343;
-	width: 15%;
+	width: 20%;
 	border-top: 1px solid #15171980;
 	border-bottom: 1px solid #15171980;
 	overflow-y: auto;
@@ -28,6 +29,7 @@ const Sidebar = ({contacts, selectRecipient, userName, currentChatId}) => {
     return (
         <Wrapper>
             <Ul>
+                <SearchContact></SearchContact>
                 {contacts &&
                 contacts.map((contact, id) => {
                     const color = colors[id];

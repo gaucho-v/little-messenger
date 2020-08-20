@@ -8,13 +8,14 @@ const Wrapper = styled.div`
 	background-color: #233343;
 `
 
-const Name = styled.p`
+const RecipientName = styled.p`
 	color: white;
 	margin: 2px;
 	margin-left: 16px;
+	font-size: medium;
 `
 
-const TextDate = styled.p`
+const LastMessageDate = styled.p`
 	color: #3d5169;
 	margin: 2px;
 	margin-left: 16px;
@@ -22,16 +23,12 @@ const TextDate = styled.p`
 `
 
 const ContactPanel = ({recipient, messages}) => {
-	let date = null;
-	if(messages) {
-		 date = messages[messages.length - 1].date
-
-		console.log(date)
-	}
+	let date = '';
+	if(messages) date = messages[messages.length - 1].date;
 	return (
 		<Wrapper>
-			{recipient ? <Name>Кому: {recipient}</Name> : <Name>Кому: не выбрано</Name>}
-			{messages ? <TextDate>{date}</TextDate> : ''}
+			{recipient ? <RecipientName>Кому: {recipient}</RecipientName> : <RecipientName>Кому: не выбрано</RecipientName>}
+			<LastMessageDate>Дата последнего сообщения: {date}</LastMessageDate>
 		</Wrapper>
 	)
 }
