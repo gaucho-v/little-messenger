@@ -1,0 +1,4 @@
+export const SET_CONTACT = 'APP/SET_CONTACT';
+export const ADD_MESSAGE = 'APP/ADD_MESSAGE';
+export const EXIT_APP = 'APP/EXIT';
+export const SET_SEARCH_CONTACTS = 'APP/SET_SEARCH_CONTACTS';
