@@ -1,9 +1,9 @@
-import React from 'react'
-import {connect} from 'react-redux';
-import styled from 'styled-components'
-import Contact from "./Contact";
-import {selectRecipient,} from "../../store/app/actions";
-import SearchContact from "./SearchContact";
+import React from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import Contact from './Contact';
+import { selectRecipient } from '../../store/app/actions';
+import SearchedContacts from './SearchedContacts';
 
 const Wrapper = styled.aside`
 	background-color: #233343;
@@ -15,45 +15,50 @@ const Wrapper = styled.aside`
     display: flex;
     justify-content: center;
 }
-`
+`;
 const Ul = styled.ul`
-	width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+`;
 
-const colors = ['#980303', '#28a745', '#ffc107', '#20c997'];
 
-const Sidebar = ({contacts, selectRecipient, userName, currentChatId}) => {
-    return (
-        <Wrapper>
-            <Ul>
-                <SearchContact></SearchContact>
-                {contacts &&
-                contacts.map((contact, id) => {
-                    const color = colors[id];
-                    return (
-                        <Contact key={contact + id}
-                                 color={color}
-                                 contact={contact}
-                                 onSelect={selectRecipient}
-								 isSelected={currentChatId === contact}
-                                 userName={userName}
-                        />
-                    )
-                })}
-            </Ul>
-        </Wrapper>
-    )
-}
+const Sidebar = ({
+  foundedContacts,
+  contacts,
+  selectRecipient,
+  userName,
+  currentChatId,
+  onAddContact,
+  onRemoveContact,
+}) => (
+  <Wrapper>
+    <Ul>
+      {contacts &&
+        !foundedContacts &&
+        contacts.map((contact, id) => (
+          <Contact
+            key={contact + id}
+            contact={contact}
+            onSelect={selectRecipient}
+            isSelected={currentChatId === contact}
+            userName={userName}
+            onRemoveContact={onRemoveContact}
+          />
+        ))}
+      {foundedContacts && <SearchedContacts onAddContact={onAddContact} />}
+    </Ul>
+  </Wrapper>
+);
 
 const mapStateToProps = state => ({
-	currentChatId: state.appStore.recipient,
-})
+  currentChatId: state.appStore.recipient,
+  foundedContacts: state.appStore.foundedContacts,
+});
 
 const mapDispatchToProps = {
-	selectRecipient
-}
+  selectRecipient,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
